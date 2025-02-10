@@ -4,11 +4,7 @@ interface CardProps {
   buildingName: string;
 }
 
-export default function Card({
-  img,
-  roomsAvaliable = 10,
-  buildingName = "test",
-}: CardProps) {
+export default function Card({ img, roomsAvaliable, buildingName }: CardProps) {
   return (
     <button
       className={`flex md:flex-col-reverse justify-between p-3 rounded-xl bg-center bg-cover w-full md:h-[400px]`}
