@@ -60,25 +60,13 @@ app.post("/parse", (req: Request, res: Response) => {
 // [TASK 1] ====================================================================
 // Takes in a recipeName and returns it in a form that
 const parse_handwriting = (recipeName: string): string | null => {
-  const re = /[^A-Za-z\s]/;
-  const reWhiteSpace = /\s+/g;
+  const re = /[^A-Za-z\s]/g;
+  const reUnderscoreDash = /[-_]+/g;
   try {
     const res = recipeName
-      .split("")
-      // sanitise letters
-      .reduce((accmu, letter) => {
-        switch (letter) {
-          case "-":
-          case "_":
-            return accmu + " ";
-          case letter.match(re)?.input:
-            return accmu;
-          default:
-            return accmu + letter;
-        }
-      }, "")
+      .replace(reUnderscoreDash, " ")
+      .replace(re, "")
       .trim()
-      .replace(reWhiteSpace, " ")
       .split(" ")
       // sanitise words
       .map((letter) => {
