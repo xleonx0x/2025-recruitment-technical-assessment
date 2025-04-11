@@ -25,7 +25,8 @@ public class BuildingLoader {
     public func fetchBuildings() async -> Result  {
         switch await client.get(from: url) {
         case .success(let data):
-            guard let remoteBuildings = try? JSONDecoder().decode([RemoteBuilding].self, from: data.0), data.1.statusCode == 200 else {
+            guard let remoteBuildings = try? JSONDecoder().decode([RemoteBuilding].self, from: data.0), data.1.statusCode == 200
+            else {
                 return .failure(Error.invalidData)
             }
             
